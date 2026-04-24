@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VPMAufsichten"
         mc:Ignorable="d"
-        Title="VPM Aufsichtsplan" Height="450" Width="800">
+        Icon="logo.ico"
+        Title="VPM Aufsichtsplan" Height="700" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -22,10 +23,10 @@
                         <TextBlock Text="VPM Ordner öffnen"/>
                     </StackPanel>
                 </Button>
-                <Button Click="Button_Click_1" IsEnabled="False">
+                <Button Click="Button_Click_1" x:Name="uiSave" IsEnabled="False">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" Margin="0,0,5,0"/>
-                        <TextBlock x:Name="uiSave" Text="Plan speichern"/>
+                        <TextBlock Text="Plan speichern"/>
                     </StackPanel>
                 </Button>
                 <Separator/>
