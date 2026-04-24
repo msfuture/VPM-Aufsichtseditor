@@ -11,33 +11,50 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ToolBar Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2" >
-            <Button Content="Öffnen" Click="Button_Click"/>
-            <Separator/>
+        <ToolBarTray Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2">
+            <ToolBar>
+                <Button Click="Button_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE8B7;" FontFamily="Segoe MDL2 Assets" Margin="0,0,5,0"/>
+                        <TextBlock Text="VPM Ordner öffnen"/>
+                    </StackPanel>
+                </Button>
+                <Button Click="Button_Click_1" IsEnabled="False">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE74E;" FontFamily="Segoe MDL2 Assets" Margin="0,0,5,0"/>
+                        <TextBlock x:Name="uiSave" Text="Plan speichern"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
 
-            <ComboBox x:Name="uiPause" SelectionChanged="ComboBox_SelectionChanged" Width="130">
-                <ComboBoxItem Content="Frühaufsicht" Tag="1"/>
-                <ComboBoxItem Content="1. Pause" Tag="2"/>
-                <ComboBoxItem Content="2. Pause" Tag="3"/>
-                <ComboBoxItem Content="Mittagsaufsicht" Tag="4"/>
-            </ComboBox>
-            <CheckBox x:Name="uiHideEmpty" Content="leere Zeilen ausblenden" IsChecked="False" Checked="uiHideEmpty_Checked" Unchecked="uiHideEmpty_Checked"/>
-        </ToolBar>
+                <ComboBox x:Name="uiPause" SelectionChanged="ComboBox_SelectionChanged" Width="130" IsEnabled="False">
+                    <ComboBoxItem Content="Frühaufsicht" Tag="1"/>
+                    <ComboBoxItem Content="1. Pause" Tag="2"/>
+                    <ComboBoxItem Content="2. Pause" Tag="3"/>
+                    <ComboBoxItem Content="Mittagsaufsicht" Tag="4"/>
+                </ComboBox>
+                <CheckBox x:Name="uiHideEmpty" Content="leere Zeilen ausblenden" IsChecked="False" Checked="uiHideEmpty_Checked" Unchecked="uiHideEmpty_Checked" IsEnabled="False"/>
+            </ToolBar>
+        </ToolBarTray>
         <DataGrid x:Name="uiGrid" Grid.Column="0" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"
           AutoGenerateColumns="False" 
           CanUserAddRows="False" 
-          SelectionUnit="Cell"
+          SelectionUnit="CellOrRowHeader"
+          SelectionMode="Extended"
+          AllowDrop="True"
           GridLinesVisibility="All"
           FontSize="14"
-          AlternatingRowBackground="#F9F9F9">
+          AlternatingRowBackground="#F9F9F9" CellEditEnding="uiGrid_CellEditEnding" PreviewMouseLeftButtonDown="uiGrid_PreviewMouseLeftButtonDown" DragOver="uiGrid_DragOver" PreviewDrop="uiGrid_Drop">
             <DataGrid.Columns>
+                
                 <DataGridTextColumn Header="Aufsichtsort" 
                             Binding="{Binding Ort}" 
                             IsReadOnly="True" 
                             Width="180">
+                    
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextAlignment" Value="Right"/>
